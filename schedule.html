@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule - Task Hero</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="schedule-page">
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>Task Hero</h1>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html">
+                    <span class="icon">📊</span>
+                    Dashboard
+                </a>
+                <a href="tasks.html">
+                    <span class="icon">📝</span>
+                    Tasks
+                </a>
+                <a href="schedule.html" class="active">
+                    <span class="icon">📅</span>
+                    Schedule
+                </a>
+                <a href="more.html">
+                    <span class="icon">ℹ️</span>
+                    Info
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Top Bar -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h2>Schedule Board</h2>
+                    <div class="view-options">
+                        <button class="btn-view active">Board View</button>
+                        <button class="btn-view">Calendar View</button>
+                        <button class="btn-view">Timeline View</button>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <button class="btn primary">
+                        <span class="icon">➕</span> Tambah Task
+                    </button>
+                    <div class="profile-info">
+                        <img src="https://via.placeholder.com/40" alt="Profile" class="profile-pic">
+                        <span class="profile-name">John Doe</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Board Header -->
+            <div class="board-header">
+                <div class="board-filter">
+                    <div class="filter-group">
+                        <label>Filter:</label>
+                        <select>
+                            <option>Semua Task</option>
+                            <option>Task Saya</option>
+                            <option>Prioritas Tinggi</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Urutkan:</label>
+                        <select>
+                            <option>Tanggal</option>
+                            <option>Prioritas</option>
+                            <option>Nama</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="board-search">
+                    <input type="text" placeholder="Cari task...">
+                </div>
+            </div>
+
+            <!-- Kanban Board -->
+            <div class="kanban-board">
+                <!-- To Do Column -->
+                <div class="kanban-column">
+                    <div class="column-header">
+                        <h3>To Do</h3>
+                        <span class="task-count">3</span>
+                    </div>
+                    <div class="column-content">
+                        <div class="task-card">
+                            <div class="task-priority high">High</div>
+                            <h4>Presentasi Project</h4>
+                            <p>Persiapkan slide dan demo untuk meeting</p>
+                            <div class="task-meta">
+                                <span class="due-date">📅 25 Juni 2024</span>
+                                <span class="assignee">
+                                    <img src="https://via.placeholder.com/24" alt="Assignee">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="task-card">
+                            <div class="task-priority medium">Medium</div>
+                            <h4>Review Dokumen</h4>
+                            <p>Review dan revisi dokumen teknis</p>
+                            <div class="task-meta">
+                                <span class="due-date">📅 27 Juni 2024</span>
+                                <span class="assignee">
+                                    <img src="https://via.placeholder.com/24" alt="Assignee">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- In Progress Column -->
+                <div class="kanban-column">
+                    <div class="column-header">
+                        <h3>In Progress</h3>
+                        <span class="task-count">2</span>
+                    </div>
+                    <div class="column-content">
+                        <div class="task-card">
+                            <div class="task-priority high">High</div>
+                            <h4>Implementasi Fitur</h4>
+                            <p>Implementasi fitur baru sesuai requirement</p>
+                            <div class="task-meta">
+                                <span class="due-date">📅 23 Juni 2024</span>
+                                <span class="assignee">
+                                    <img src="https://via.placeholder.com/24" alt="Assignee">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review Column -->
+                <div class="kanban-column">
+                    <div class="column-header">
+                        <h3>Review</h3>
+                        <span class="task-count">1</span>
+                    </div>
+                    <div class="column-content">
+                        <div class="task-card">
+                            <div class="task-priority low">Low</div>
+                            <h4>Code Review</h4>
+                            <p>Review pull request untuk fitur login</p>
+                            <div class="task-meta">
+                                <span class="due-date">📅 22 Juni 2024</span>
+                                <span class="assignee">
+                                    <img src="https://via.placeholder.com/24" alt="Assignee">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Done Column -->
+                <div class="kanban-column">
+                    <div class="column-header">
+                        <h3>Done</h3>
+                        <span class="task-count">2</span>
+                    </div>
+                    <div class="column-content">
+                        <div class="task-card completed">
+                            <div class="task-priority medium">Medium</div>
+                            <h4>Setup Environment</h4>
+                            <p>Setup development environment</p>
+                            <div class="task-meta">
+                                <span class="due-date">📅 20 Juni 2024</span>
+                                <span class="assignee">
+                                    <img src="https://via.placeholder.com/24" alt="Assignee">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
