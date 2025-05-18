@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Hero - Your Personal Task Manager</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #F4F7FA;
+            color: #1E293B;
+            line-height: 1.6;
+        }
+        
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background-color: #FFFFFF;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #3B82F6;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: #1E293B;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #3B82F6;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-login {
+            background: transparent;
+            border: 1px solid #3B82F6;
+            color: #3B82F6;
+        }
+        
+        .btn-login:hover {
+            background-color: #3B82F680;
+            color: white;
+        }
+        
+        .btn-signup {
+            background-color: #3B82F6;
+            border: 1px solid #3B82F6;
+            color: white;
+        }
+        
+        .btn-signup:hover {
+            background-color: #2563EB;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #3B82F620, #10B98120);
+            padding: 140px 0 80px;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #1E293B;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            color: #64748B;
+            margin-bottom: 30px;
+        }
+        
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .btn-primary {
+            background-color: #3B82F6;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2563EB;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: #1E293B;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #F9FAFB;
+            transform: translateY(-2px);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #1E293B;
+            margin-bottom: 20px;
+        }
+        
+        .section-header p {
+            font-size: 18px;
+            color: #64748B;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #1E293B;
+        }
+        
+        .feature-card p {
+            color: #64748B;
+        }
+        
+        .feature-kanban .feature-icon {
+            color: #3B82F6;
+        }
+        
+        .feature-schedule .feature-icon {
+            color: #F59E0B;
+        }
+        
+        .feature-goals .feature-icon {
+            color: #10B981;
+        }
+        
+        .feature-teams .feature-icon {
+            color: #8B5CF6;
+        }
+        
+        /* Preview Section */
+        .preview {
+            padding: 80px 0;
+            background-color: #F8FAFC;
+        }
+        
+        .preview-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .preview-image {
+            flex: 1;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .preview-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .preview-text {
+            flex: 1;
+        }
+        
+        .preview-text h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #1E293B;
+        }
+        
+        .preview-text p {
+            font-size: 18px;
+            color: #64748B;
+            margin-bottom: 25px;
+        }
+        
+        .preview-features {
+            margin-top: 30px;
+        }
+        
+        .preview-feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .check-icon {
+            color: #10B981;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        /* Testimonial Section */
+        .testimonials {
+            padding: 80px 0;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial-content {
+            font-style: italic;
+            color: #64748B;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+        
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-name {
+            font-weight: 600;
+            color: #1E293B;
+        }
+        
+        .author-role {
+            color: #64748B;
+            font-size: 14px;
+        }
+        
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, #3B82F6, #2563EB);
+            padding: 80px 0;
+            text-align: center;
+            color: white;
+        }
+        
+        .cta h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+        
+        .cta-btn {
+            background-color: white;
+            color: #3B82F6;
+            padding: 15px 30px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .cta-btn:hover {
+            background-color: #F9FAFB;
+            transform: translateY(-2px);
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: #1E293B;
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .footer-desc {
+            color: #CBD5E1;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #CBD5E1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #3B82F6;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #2D3748;
+            color: #94A3B8;
+            font-size: 14px;
+        }
+        
+        /* Login Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            overflow: auto;
+            padding-top: 60px;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5px auto;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+            padding: 20px;
+            animation: modalopen 0.5s;
+        }
+        
+        @keyframes modalopen {
+            from {opacity: 0; transform: translateY(-60px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+        
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #64748B;
+            cursor: pointer;
+        }
+        
+        .modal-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-header h2 {
+            font-size: 24px;
+            color: #1E293B;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            color: #1E293B;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #CBD5E1;
+            font-size: 16px;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #3B82F6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+        
+        .form-submit {
+            width: 100%;
+            padding: 12px;
+            background-color: #3B82F6;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .form-submit:hover {
+            background-color: #2563EB;
+        }
+        
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #64748B;
+        }
+        
+        .form-footer a {
+            color: #3B82F6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        /* Responsive */
+        @media (max-width: 900px) {
+            .preview-content {
+                flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 30px;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .auth-buttons {
+                display: none;
+            }
+            
+            .mobile-auth-btn {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><span class="logo-icon">📋</span>Task Hero</a>
+            <div class="nav-links">
+                <a href="index.html">Beranda</a>
+                <a href="tasks.html">Tasks</a>
+                <a href="schedule.html">Schedule</a>
+                <a href="more.html">Selengkapnya</a>
+            </div>
+            <div class="auth-buttons">
+                <button class="btn btn-login" onclick="openModal('loginModal')">Login</button>
+                <button class="btn btn-signup" onclick="openModal('signupModal')">Sign Up</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Kelola Tugas dengan Mudah dan Efisien</h1>
+                <p>Task Hero membantu Anda mengelola tugas, jadwal, dan tujuan dengan antarmuka visual yang intuitif berbasis kanban board. Tingkatkan produktivitas dan kelola waktu dengan lebih baik.</p>
+                <div class="hero-btns">
+                    <a href="#" class="btn-primary" onclick="openModal('signupModal')">Mulai Gratis</a>
+                    <a href="#features" class="btn-secondary">Pelajari Lebih Lanjut</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Fitur Unggulan</h2>
+                <p>Task Hero menyediakan berbagai fitur untuk membantu Anda mengelola tugas dan meningkatkan produktivitas.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card feature-kanban">
+                    <div class="feature-icon">📋</div>
+                    <h3>Kanban Board</h3>
+                    <p>Visualisasikan alur kerja Anda dengan sistem kanban board yang intuitif, memudahkan pengelolaan dan pemantauan progres tugas.</p>
+                </div>
+                <div class="feature-card feature-schedule">
+                    <div class="feature-icon">📅</div>
+                    <h3>Weekly & Monthly Planner</h3>
+                    <p>Rencanakan tugas dan aktivitas Anda dengan jadwal mingguan dan bulanan yang terintegrasi.</p>
+                </div>
+                <div class="feature-card feature-goals">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Goal Tracking</h3>
+                    <p>Tetapkan dan pantau tujuan Anda dengan fitur pelacakan kemajuan yang memberikan motivasi untuk mencapai target.</p>
+                </div>
+                <div class="feature-card feature-teams">
+                    <div class="feature-icon">👥</div>
+                    <h3>Kolaborasi Tim</h3>
+                    <p>Bekerja sama dengan tim Anda, bagikan tugas dan jadwal dengan mudah sehingga semua orang tetap sinkron.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Preview Section -->
+    <section class="preview">
+        <div class="container">
+            <div class="preview-content">
+                <div class="preview-image">
+                    <img src="https://via.placeholder.com/600x400" alt="Dashboard Preview">
+                </div>
+                <div class="preview-text">
+                    <h2>Kenapa Harus Task Hero?</h2>
+                    <p>Task Hero dirancang untuk memberikan pengalaman terbaik dalam mengelola tugas dan jadwal Anda dengan tampilan yang bersih dan mudah digunakan.</p>
+                    <div class="preview-features">
+                        <div class="preview-feature">
+                            <span class="check-icon">✓</span>
+                            <span>Antarmuka intuitif berbasis kanban</span>
+                        </div>
+                        <div class="preview-feature">
+                            <span class="check-icon">✓</span>
+                            <span>Pelacakan waktu dan produktivitas</span>
+                        </div>
+                        <div class="preview-feature">
+                            <span class="check-icon">✓</span>
+                            <span>Notifikasi dan pengingat tugas</span>
+                        </div>
+                        <div class="preview-feature">
+                            <span class="check-icon">✓</span>
+                            <span>Sinkronisasi antar perangkat</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Apa Kata Pengguna Kami</h2>
+                <p>Ribuan pengguna telah meningkatkan produktivitas mereka dengan Task Hero.</p>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "Task Hero telah mengubah cara saya mengatur tugas sehari-hari. Antarmuka kanban board sangat intuitif dan memudahkan untuk melihat progres pekerjaan saya."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="https://via.placeholder.com/50" alt="User Avatar">
+                        </div>
+                        <div class="author-info">
+                            <div class="author-name">Budi Santoso</div>
+                            <div class="author-role">Web Developer</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "Fitur Goal Tracking sangat membantu saya untuk tetap fokus pada tujuan jangka panjang. Visualisasi progres memberi motivasi untuk terus maju."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="https://via.placeholder.com/50" alt="User Avatar">
+                        </div>
+                        <div class="author-info">
+                            <div class="author-name">Dewi Putri</div>
+                            <div class="author-role">Project Manager</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "Sebagai mahasiswa, Task Hero membantu saya mengelola jadwal kuliah, tugas, dan kegiatan ekstrakurikuler. Sangat direkomendasikan!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="https://via.placeholder.com/50" alt="User Avatar">
+                        </div>
+                        <div class="author-info">
+                            <div class="author-name">Rini Kurniawan</div>
+                            <div class="author-role">Mahasiswa</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Siap Meningkatkan Produktivitas Anda?</h2>
+            <p>Mulai gunakan Task Hero sekarang dan rasakan perbedaannya dalam mengelola tugas dan waktu Anda.</p>
+            <a href="#" class="cta-btn" onclick="openModal('signupModal')">Daftar Sekarang - Gratis</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <a href="#" class="footer-logo">Task Hero</a>
+                    <p class="footer-desc">Solusi manajemen tugas dan jadwal berbasis kanban board untuk meningkatkan produktivitas Anda.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Produk</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Fitur</a></li>
+                        <li><a href="#">Harga</a></li>
+                        <li><a href="#">Integrasi</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Perusahaan</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Karir</a></li>
+                        <li><a href="#">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Dukungan</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Bantuan</a></li>
+                        <li><a href="#">Kontak Support</a></li>
+                        <li><a href="#">Dokumentasi</a></li>
+                        <li><a href="#">Status Sistem</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Task Hero. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('loginModal')">&times;</span>
+            <div class="modal-header">
+                <h2>Login</h2>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" class="form-input" placeholder="Masukkan email Anda" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" class="form-input" placeholder="Masukkan password" required>
+                </div>
+                <button type="submit" class="form-submit">Login</button>
+                <div class="form-footer">
+                    <p>Belum punya akun? <a href="#" onclick="switchModal('loginModal', 'signupModal')">Daftar sekarang</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('signupModal')">&times;</span>
+            <div class="modal-header">
+                <h2>Daftar</h2>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label for="signup-name">Nama Lengkap</label>
+                    <input type="text" id="signup-name" class="form-input" placeholder="Masukkan nama lengkap" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" class="form-input" placeholder="Masukkan email Anda" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" class="form-input" placeholder="Buat password (min. 8 karakter)" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-confirm">Konfirmasi Password</label>
+                    <input type="password" id="signup-confirm" class="form-input" placeholder="Konfirmasi password" required>
+                </div>
+                <button type="submit" class="form-submit">Daftar</button>
+                <div class="form-footer">
+                    <p>Sudah punya akun? <a href="#" onclick="switchModal('signupModal', 'loginModal')">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Modal functionality
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+        
+        function switchModal(closeModalId, openModalId) {
+            closeModal(closeModalId);
+            openModal(openModalId);
+        }
+        
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

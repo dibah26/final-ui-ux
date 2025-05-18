@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Task Hero</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dashboard-page">
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>Task Hero</h1>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="active">
+                    <span class="icon">📊</span>
+                    Dashboard
+                </a>
+                <a href="tasks.html">
+                    <span class="icon">📝</span>
+                    Tasks
+                </a>
+                <a href="schedule.html">
+                    <span class="icon">📅</span>
+                    Schedule
+                </a>
+                <a href="more.html">
+                    <span class="icon">ℹ️</span>
+                    Info
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h2>Overview</h2>
+                </div>
+                <div class="header-right">
+                    <div class="notifications">
+                        <span class="icon">🔔</span>
+                        <span class="badge">3</span>
+                    </div>
+                    <div class="profile-info">
+                        <img src="https://via.placeholder.com/40" alt="Profile" class="profile-pic">
+                        <span class="profile-name">John Doe</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <!-- Quick Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📋</div>
+                        <div class="stat-info">
+                            <h3>Total Tasks</h3>
+                            <p class="stat-number">24</p>
+                            <p class="stat-label">Active Tasks</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-info">
+                            <h3>Completed</h3>
+                            <p class="stat-number">18</p>
+                            <p class="stat-label">This Week</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⏳</div>
+                        <div class="stat-info">
+                            <h3>Upcoming</h3>
+                            <p class="stat-number">7</p>
+                            <p class="stat-label">Due This Week</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📈</div>
+                        <div class="stat-info">
+                            <h3>Progress</h3>
+                            <p class="stat-number">75%</p>
+                            <p class="stat-label">Monthly Goal</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activities & Quick Actions -->
+                <div class="dashboard-grid">
+                    <section class="dashboard-section activities-section">
+                        <div class="section-header">
+                            <h3>Recent Activities</h3>
+                            <button class="btn-link">View All</button>
+                        </div>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon completed">✓</div>
+                                <div class="activity-details">
+                                    <h4>Completed Task</h4>
+                                    <p>Website Redesign Project</p>
+                                    <span class="activity-time">2 hours ago</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon pending">⏳</div>
+                                <div class="activity-details">
+                                    <h4>Task Due Soon</h4>
+                                    <p>Database Optimization</p>
+                                    <span class="activity-time">Due in 3 hours</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon new">+</div>
+                                <div class="activity-details">
+                                    <h4>New Task Added</h4>
+                                    <p>Mobile App Development</p>
+                                    <span class="activity-time">1 day ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="dashboard-section quick-access-section">
+                        <div class="section-header">
+                            <h3>Quick Access</h3>
+                        </div>
+                        <div class="quick-access-grid">
+                            <a href="tasks.html" class="quick-access-card">
+                                <div class="card-icon">📝</div>
+                                <h4>New Task</h4>
+                            </a>
+                            <a href="schedule.html" class="quick-access-card">
+                                <div class="card-icon">📅</div>
+                                <h4>Schedule</h4>
+                            </a>
+                            <a href="#" class="quick-access-card">
+                                <div class="card-icon">📊</div>
+                                <h4>Reports</h4>
+                            </a>
+                            <a href="#" class="quick-access-card">
+                                <div class="card-icon">⚙️</div>
+                                <h4>Settings</h4>
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
